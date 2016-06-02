@@ -10,5 +10,9 @@ RUN abuild-keygen -a
 
 ENV REPODEST /packages
 
+USER root
 COPY . /src
+RUN chown -R builder:abuild /src
+
+USER builder
 CMD /src/build-all.sh
