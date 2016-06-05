@@ -5,9 +5,9 @@ pkgver=5.0.5
 pkgrel=1
 pkgdesc="web frontend for Seafile"
 url="https://github.com/haiwen/seahub/"
-arch="all"
+arch="noarch"
 license="Apache"
-depends="bash py-dateutil py-mako py-simplejson py-pillow py-pip py-virtualenv py-six
+depends="bash py-dateutil py-mako py-simplejson py-pillow py-pip py-virtualenv py-six python-dev
          python py-django1.5 py-gunicorn py-chardet py-django-djblets py-ccnet py-libsearpc
 	 py-django-simple-captcha py-django-registration py-flup py-seafile seafile-server"
 source="$pkgname-$pkgver.tar.gz::https://github.com/haiwen/seahub/archive/v${pkgver}-server.tar.gz
