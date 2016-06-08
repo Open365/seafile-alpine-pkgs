@@ -33,17 +33,4 @@ package() {
 	cd "${_builddir}"
 	mkdir -m 755 -p "${pkgdir}"/usr/share/seahub || return 1
 	cp -ar "${_builddir}"/* "${pkgdir}"/usr/share/seahub
-	install -D -m0644 "${srcdir}"/seahub.confd "${pkgdir}"/etc/conf.d/seahub \
-	    || return 1
-	install -D -m0755 "${srcdir}"/seahub.initd "${pkgdir}"/etc/init.d/seahub \
-	    || return 1
 }
-md5sums="8be846039eca627d2d4a8631bba89cba  seahub-5.0.5.tar.gz
-e1ed5467cd78159fb7e73e2d2d925a8e  seahub.confd
-1a1777dd469cbbc6773b2c31e265cb37  seahub.initd"
-sha256sums="50b13cb3a61d4f37070ce78e35f337fb2f1dfd063842fdb1adb4018654cbecbf  seahub-5.0.5.tar.gz
-8b0e8bf45d278bbf32f4dca4a402f2584a87e46adee2e24732804acebd1c2cff  seahub.confd
-2da114c938efa349f7762466d5cffc26393262968db5194cd469c2fd79077396  seahub.initd"
-sha512sums="fb7cd9abe7f958855f4ff8484c3d20d1dee64ed79649c230277f1090704eedc62bb5a779d230a458f33511c1b86cb87cb9b026c5119e304551674b2c9cca5aaf  seahub-5.0.5.tar.gz
-d55dbd3e59ae48a930cbcb42ec840689a17f6cb1cb16f6d0d155e646b24accb8a5e5c1f59f549f66941bb21475b2c6ce55a3bb014d016bfeddea13602984c2a6  seahub.confd
-71445244d966d5770618c2b4b003959ae135e737657d7b7cb79b2def8787655d0a50f8a7fdb1fee64108e51410e99d1a52144c707c2247bc7ffd8d422c5c7f4c  seahub.initd"
