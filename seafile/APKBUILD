@@ -15,7 +15,7 @@ depends="bash ${pkgname}-common"
 pkgusers="seafile"
 pkggroups="seafile"
 source="$pkgname-$pkgver.tar.gz::https://github.com/haiwen/seafile/archive/v${pkgver}.tar.gz
-       seafile.initd seafile.confd fix-paths.patch"
+       fix-paths.patch"
 subpackages="$pkgname-dev $pkgname-doc py-$pkgname:py $pkgname-server
 	$pkgname-common"
 install="seafile-server.pre-install seafile-server.post-install"
@@ -80,10 +80,6 @@ server() {
 	done
 	mkdir -m 755 -p "${subpkgdir}"/usr/share/seafile || return 1
 	cp -ar "${_builddir}"/scripts "${subpkgdir}"/usr/share/seafile || return 1
-	install -D -m0644 "${srcdir}"/seafile.confd "${subpkgdir}"/etc/conf.d/seafile \
-	    || return 1
-	install -D -m0755 "${srcdir}"/seafile.initd "${subpkgdir}"/etc/init.d/seafile \
-	    || return 1
 
 	#make dirs for default instance
 	SEAFILE_HOME="${subpkgdir}"/var/lib/seafile
