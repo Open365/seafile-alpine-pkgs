@@ -1,0 +1,92 @@
+diff --git a/scripts/seafile.sh b/scripts/seafile.sh
+index 0bc3935..2b3c6c4 100755
+--- a/scripts/seafile.sh
++++ b/scripts/seafile.sh
+@@ -17,13 +17,9 @@ INSTALLPATH=$(dirname "${SCRIPT}")
+ TOPDIR=$(dirname "${INSTALLPATH}")
+ default_ccnet_conf_dir=${TOPDIR}/ccnet
+ central_config_dir=${TOPDIR}/conf
+-seaf_controller="${INSTALLPATH}/seafile/bin/seafile-controller"
++seaf_controller="/usr/bin/seafile-controller"
+ 
+ 
+-export PATH=${INSTALLPATH}/seafile/bin:$PATH
+-export ORIG_LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
+-export SEAFILE_LD_LIBRARY_PATH=${INSTALLPATH}/seafile/lib/:${INSTALLPATH}/seafile/lib64:${LD_LIBRARY_PATH}
+-
+ script_name=$0
+ function usage () {
+     echo "usage : "
+@@ -71,7 +67,7 @@ function read_seafile_data_dir () {
+ }
+ 
+ function test_config() {
+-    if ! LD_LIBRARY_PATH=$SEAFILE_LD_LIBRARY_PATH ${seaf_controller} --test \
++    if ! ${seaf_controller} --test \
+          -c "${default_ccnet_conf_dir}" \
+          -d "${seafile_data_dir}" \
+          -F "${central_config_dir}" ; then
+@@ -116,7 +112,7 @@ function start_seafile_server () {
+     echo "Starting seafile server, please wait ..."
+ 
+     mkdir -p $TOPDIR/logs
+-    LD_LIBRARY_PATH=$SEAFILE_LD_LIBRARY_PATH ${seaf_controller} \
++    ${seaf_controller} \
+                    -c "${default_ccnet_conf_dir}" \
+                    -d "${seafile_data_dir}" \
+                    -F "${central_config_dir}"
+diff --git a/scripts/setup-seafile-mysql.py b/scripts/setup-seafile-mysql.py
+index f526c8d..67d4be0 100644
+--- a/scripts/setup-seafile-mysql.py
++++ b/scripts/setup-seafile-mysql.py
+@@ -287,7 +287,7 @@ class EnvManager(object):
+     def __init__(self):
+         self.install_path = os.path.dirname(os.path.abspath(__file__))
+         self.top_dir = os.path.dirname(self.install_path)
+-        self.bin_dir = os.path.join(self.install_path, 'seafile', 'bin')
++        self.bin_dir = os.path.join('/usr', 'bin')
+         self.central_config_dir = os.path.join(self.top_dir, 'conf')
+         Utils.must_mkdir(self.central_config_dir)
+ 
+diff --git a/scripts/setup-seafile.sh b/scripts/setup-seafile.sh
+index 50b2914..2b9dc8a 100755
+--- a/scripts/setup-seafile.sh
++++ b/scripts/setup-seafile.sh
+@@ -8,8 +8,6 @@ default_seafile_data_dir=${TOPDIR}/seafile-data
+ default_seahub_db=${TOPDIR}/seahub.db
+ default_conf_dir=${TOPDIR}/conf
+ 
+-export SEAFILE_LD_LIBRARY_PATH=${INSTALLPATH}/seafile/lib/:${INSTALLPATH}/seafile/lib64:${LD_LIBRARY_PATH}
+-
+ use_existing_ccnet="false"
+ use_existing_seafile="false"
+ 
+@@ -394,8 +392,8 @@ echo
+ echo "If you are OK with the configuration, press [ENTER] to continue."
+ read dummy
+ 
+-ccnet_init=${INSTALLPATH}/seafile/bin/ccnet-init
+-seaf_server_init=${INSTALLPATH}/seafile/bin/seaf-server-init
++ccnet_init=/usr/bin/ccnet-init
++seaf_server_init=/usr/bin/seaf-server-init
+ 
+ # -------------------------------------------
+ # Create ccnet conf 
+@@ -403,7 +401,7 @@ seaf_server_init=${INSTALLPATH}/seafile/bin/seaf-server-init
+ if [[ "${use_existing_ccnet}" != "true" ]]; then
+     echo "Generating ccnet configuration in ${default_ccnet_conf_dir}..."
+     echo
+-    if ! LD_LIBRARY_PATH=$SEAFILE_LD_LIBRARY_PATH "${ccnet_init}" \
++    if ! "${ccnet_init}" \
+          -F "${default_conf_dir}" \
+          -c "${default_ccnet_conf_dir}" \
+          --name "${server_name}" \
+@@ -422,7 +420,7 @@ sleep 0.5
+ if [[ "${use_existing_seafile}" != "true" ]]; then
+     echo "Generating seafile configuration in ${seafile_data_dir} ..."
+     echo
+-    if ! LD_LIBRARY_PATH=$SEAFILE_LD_LIBRARY_PATH ${seaf_server_init} \
++    if ! ${seaf_server_init} \
+          --central-config-dir "${default_conf_dir}" \
+          --seafile-dir "${seafile_data_dir}" \
+          --fileserver-port ${fileserver_port}; then

@@ -13,6 +13,7 @@ cd $THISDIR/ccnet/
 abuild -r
 
 cd $THISDIR/seafile/
+abuild checksum
 abuild -r
 
 cd $THISDIR/seahub/
