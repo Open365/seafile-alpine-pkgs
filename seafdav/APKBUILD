@@ -33,5 +33,5 @@ package() {
 	cp -ar "${_builddir}"/* "${pkgdir}"/usr/share/seafdav
 
 	mkdir -m 755 -p "${pkgdir}"/var/lib/seafile/default/scripts/ || return 1
-	install -D -m0644 "${srcdir}"/seafdav.sh "${pkgdir}"/var/lib/seafile/default/scripts/ || return 1
+	install -D "${srcdir}"/seafdav.sh "${pkgdir}"/var/lib/seafile/default/scripts/ || return 1
 }

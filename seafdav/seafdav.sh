@@ -86,6 +86,21 @@ function warning_if_seafdav_not_running () {
     fi
 }
 
+function read_seafile_data_dir () {
+    seafile_ini=${default_ccnet_conf_dir}/seafile.ini
+    if [[ ! -f ${seafile_ini} ]]; then
+        echo "${seafile_ini} not found. Now quit"
+        exit 1
+    fi
+    seafile_data_dir=$(cat "${seafile_ini}")
+    if [[ ! -d ${seafile_data_dir} ]]; then
+        echo "Your seafile server data directory \"${seafile_data_dir}\" is invalid or doesn't exits."
+        echo "Please check it first, or create this directory yourself."
+        echo ""
+        exit 1;
+    fi
+}
+
 function before_start() {
     prepare_env;
 }
@@ -100,6 +115,7 @@ function start_seafdav () {
 function prepare_env() {
     check_python_executable;
     validate_ccnet_conf_dir;
+    read_seafile_data_dir;
 
     if [[ -z "$LANG" ]]; then
         echo "LANG is not set in ENV, set to en_US.UTF-8"
