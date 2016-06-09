@@ -108,7 +108,7 @@ function before_start() {
 function start_seafdav () {
     before_start;
     cd /usr/share/seafdav
-    $PYTHON -m wsgidav.server.run_server
+    $PYTHON -m wsgidav.server.run_server -H 0.0.0.0
     echo "Seafdav is started"
 }
 
