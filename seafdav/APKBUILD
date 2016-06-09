@@ -6,7 +6,7 @@ pkgdesc="webdav for Seafile"
 url="https://github.com/Open365/seafav/"
 arch="noarch"
 license="Apache"
-depends="seafile-server"
+depends="seafile-server seafobj"
 
 source="$pkgname-$pkgver.zip::https://github.com/Open365/seafdav/archive/open365.zip"
 install=""

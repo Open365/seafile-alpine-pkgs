@@ -1,0 +1,33 @@
+# Maintainer: Vishesh Handa <me@vhanda.in>
+pkgname=seafobj
+pkgver=5.0.5
+pkgrel=1
+pkgdesc="python library for accessing seafile data model"
+url="https://github.com/haiwen/seafobj/"
+arch="noarch"
+license="Apache"
+depends="python"
+source="$pkgname-$pkgver.tar.gz::https://github.com/haiwen/seafobj/archive/v${pkgver}-server.tar.gz"
+install=""
+
+_builddir="${srcdir}/${pkgname}-${pkgver}-server"
+
+prepare() {
+	local pf
+	cd "${_builddir}"
+	for pf in $source; do
+		case $pf in
+		*.patch) msg $pf; patch -p1 -i "$srcdir"/${pf} || return 1;;
+		esac
+	done
+}
+
+build() {
+	echo
+}
+
+package() {
+	cd "$_builddir"
+	mkdir -m 755 -p "${pkgdir}"/usr/lib/python2.7/site-packages/seafobj || return 1
+	cp -ar "${_builddir}"/seafobj/* "${pkgdir}"/usr/lib/python2.7/site-packages/seafobj
+}
