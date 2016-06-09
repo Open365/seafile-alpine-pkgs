@@ -11,8 +11,8 @@ RUN abuild-keygen -a
 ENV REPODEST /packages
 
 USER root
-COPY . /src
 RUN cp /home/builder/.abuild/*.pub /etc/apk/keys
+COPY . /src
 RUN chown -R builder:abuild /src
 
 USER builder

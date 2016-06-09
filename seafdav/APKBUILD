@@ -8,7 +8,7 @@ arch="noarch"
 license="Apache"
 depends="seafile-server seafobj"
 
-source="$pkgname-$pkgver.zip::https://github.com/Open365/seafdav/archive/open365.zip"
+source="$pkgname-$pkgver.zip::https://github.com/Open365/seafdav/archive/open365.zip seafdav.sh"
 install=""
 
 _builddir="${srcdir}/seafdav-open365"
@@ -31,4 +31,7 @@ package() {
 	cd "${_builddir}"
 	mkdir -m 755 -p "${pkgdir}"/usr/share/seafdav || return 1
 	cp -ar "${_builddir}"/* "${pkgdir}"/usr/share/seafdav
+
+	mkdir -m 755 -p "${pkgdir}"/var/lib/seafile/default/scripts/ || return 1
+	install -D -m0644 "${srcdir}"/seafdav.sh "${pkgdir}"/var/lib/seafile/default/scripts/ || return 1
 }
