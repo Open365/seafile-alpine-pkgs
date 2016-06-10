@@ -7,7 +7,7 @@ pkgdesc="Cloud storage system with advanced support for file syncing, privacy pr
 url="https://github.com/haiwen/seafile/"
 arch="all"
 license="GPL3"
-makedepends="autoconf automake bash ccnet-dev curl-dev fuse-dev glib-dev
+makedepends="autoconf automake bash ccnet-dev curl-dev glib-dev
 	intltool jansson-dev libarchive-dev libevent-dev libevhtp-dev
 	libsearpc-dev libtool libzdb-dev openssl-dev sqlite-dev util-linux-dev
 	vala bsd-compat-headers libevhtp-dev"
@@ -16,7 +16,7 @@ pkgusers="seafile"
 pkggroups="seafile"
 source="$pkgname-$pkgver.tar.gz::https://github.com/haiwen/seafile/archive/v${pkgver}.tar.gz
        fix-paths.patch"
-subpackages="$pkgname-dev $pkgname-doc py-$pkgname:py $pkgname-server
+subpackages="$pkgname-dev py-$pkgname:py $pkgname-server
 	$pkgname-common"
 install="seafile-server.pre-install seafile-server.post-install"
 
@@ -42,9 +42,9 @@ build() {
                 --infodir=/usr/share/info \
 		--enable-server \
 		--enable-python \
-		--enable-fuse \
-		--enable-client \
-		--enable-console
+		--disable-fuse \
+		--disable-client \
+		--disable-console
 	make CFLAGS="$CFLAGS $(pkgconf --cflags evhtp)" || return 1
 }
 
@@ -72,8 +72,7 @@ common() {
 server() {
 	mkdir -p "${subpkgdir}"/usr/bin
 	for b in "${pkgdir}"/usr/bin/*; do
-		if [[ "$b" != "${pkgdir}/usr/bin/seaf-cli" ]] && \
-		[[ "$b" != "${pkgdir}/usr/bin/seaf-daemon" ]] && \
+		if [[ "$b" != "${pkgdir}/usr/bin/seaf-daemon" ]] && \
 		[[ "$b" != "${pkgdir}/usr/bin/seafile" ]]; then
 			mv "$b" "${subpkgdir}/usr/bin" || return 1
 		fi
