@@ -9,6 +9,7 @@ if [[ ! -h $SEAFILE_HOME/seafile-server/seahub ]]; then
 
     mkdir -m 755 $SEAFILE_HOME/scripts/seafile
     mkdir -m 755 $SEAFILE_HOME/scripts/runtime
+    cp $SEAFILE_HOME/scripts/seahub.conf $SEAFILE_HOME/scripts/runtime/seahub.conf
 fi
 
 cat > /tmp/requirements.txt << EOF
