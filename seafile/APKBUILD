@@ -83,8 +83,4 @@ server() {
 
 	#make dirs for default instance
 	SEAFILE_HOME="${subpkgdir}"/var/lib/seafile
-	SEAFILE_DEFAULT=$SEAFILE_HOME/default
-	mkdir -m 755 -p $SEAFILE_DEFAULT 2>/dev/null
-	chown seafile:seafile $SEAFILE_DEFAULT
-
 }

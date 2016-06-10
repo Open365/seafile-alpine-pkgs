@@ -1,15 +1,14 @@
 #!/bin/sh
 
 SEAFILE_HOME=/var/lib/seafile
-SEAFILE_DEFAULT=$SEAFILE_HOME/default
 
-if [[ ! -h $SEAFILE_DEFAULT/seafile-server/seahub ]]; then
-    mkdir -m 755 -p $SEAFILE_DEFAULT/seafile-server
-    cp -R /usr/share/seahub $SEAFILE_DEFAULT/seafile-server
-    ln -s $SEAFILE_DEFAULT/seafile-server/seahub $SEAFILE_DEFAULT/scripts/seahub
+if [[ ! -h $SEAFILE_HOME/seafile-server/seahub ]]; then
+    mkdir -m 755 -p $SEAFILE_HOME/seafile-server
+    cp -R /usr/share/seahub $SEAFILE_HOME/seafile-server
+    ln -s $SEAFILE_HOME/seafile-server/seahub $SEAFILE_HOME/scripts/seahub
 
-    mkdir -m 755 $SEAFILE_DEFAULT/scripts/seafile
-    mkdir -m 755 $SEAFILE_DEFAULT/scripts/runtime
+    mkdir -m 755 $SEAFILE_HOME/scripts/seafile
+    mkdir -m 755 $SEAFILE_HOME/scripts/runtime
 fi
 
 cat > /tmp/requirements.txt << EOF
