@@ -1,0 +1,6 @@
+These are all the required files for building the seahub
+pacakges, and its required files.
+
+$ docker build -t foo .
+$ docker run -v $PWD:/packages --rm foo
+
