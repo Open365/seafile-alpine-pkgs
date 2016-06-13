@@ -20,8 +20,4 @@ cd $THISDIR/seafobj/
 abuild checksum
 abuild -r
 
-cd $THISDIR/seafdav/
-abuild checksum
-abuild -r
-
 echo "All packges built in /packages"
