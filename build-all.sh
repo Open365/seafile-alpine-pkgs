@@ -12,6 +12,10 @@ abuild -r
 cd $THISDIR/ccnet/
 abuild -r
 
+cd $THISDIR/libevhtp/
+abuild checksum
+abuild -r
+
 cd $THISDIR/seafile/
 abuild checksum
 abuild -r
