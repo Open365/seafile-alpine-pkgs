@@ -8,9 +8,9 @@ url="https://github.com/haiwen/seafile/"
 arch="all"
 license="GPL3"
 makedepends="autoconf automake bash ccnet-dev curl-dev glib-dev
-	intltool jansson-dev libarchive-dev libevent-dev libevhtp-dev
+	intltool jansson-dev libarchive-dev libevent-dev libevhtp-dev==1.2.9-r0
 	libsearpc-dev libtool libzdb-dev openssl-dev sqlite-dev util-linux-dev
-	vala bsd-compat-headers libevhtp-dev"
+	vala bsd-compat-headers"
 depends="bash ${pkgname}-common"
 pkgusers="seafile"
 pkggroups="seafile"
