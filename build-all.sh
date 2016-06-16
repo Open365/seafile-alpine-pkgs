@@ -5,6 +5,7 @@ set -u
 set -x
 
 THISDIR="$(cd "$(dirname "$0")" && pwd)"
+sudo apk update
 
 cd $THISDIR/libsearpc/
 abuild -r
